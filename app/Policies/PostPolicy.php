@@ -11,17 +11,28 @@ class PostPolicy
     /**
      * Determine whether the user can view any models.
      */
+    /**
+     * Xác định xem user có thể XEM DANH SÁCH (view any) post không.
+     */
     public function viewAny(User $user): bool
     {
-        return false;
+        // Vì route đã được bọc 'auth:sanctum', ta biết $user đã login.
+        // Ta cho phép BẤT KỲ ai đã login được xem danh sách.
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      */
+    /**
+     * Xác định xem user có thể XEM CHI TIẾT (view) post không.
+     */
     public function view(User $user, Post $post): bool
     {
-        return false;
+        // Ai đã login cũng được xem chi tiết.
+        // (Nếu cậu muốn, cậu có thể check logic phức tạp hơn ở đây,
+        // ví dụ: chỉ cho xem bài viết 'published')
+        return true;
     }
 
     /**

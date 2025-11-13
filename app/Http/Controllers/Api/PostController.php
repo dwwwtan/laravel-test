@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Http\Requests\Api\StorePostRequest;   // <-- Import
-use App\Http\Requests\Api\UpdatePostRequest;   // <-- Import
-use App\Services\PostService;                  // <-- Import
-use App\Http\Resources\Api\PostResource;           // <-- Import
+use App\Http\Requests\Api\StorePostRequest;
+use App\Http\Requests\Api\UpdatePostRequest;
+use App\Services\PostService;
+use App\Http\Resources\Api\PostResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -20,7 +21,7 @@ class PostController extends Controller
     {
         // Đảm bảo user PHẢI có quyền (dùng Policy) TRƯỚC KHI gọi hàm
         // (Trừ 'index' và 'show' là public)
-        // $this->authorizeResource(Post::class, 'post');
+        $this->authorizeResource(Post::class, 'post');
     }
 
     /**
